@@ -2,8 +2,8 @@
 #include<stdlib.h>
 #include<string.h>
 #define Infinity 2000//表示无穷大 
-#define MaxVertexNum 40 
-#define MAX 40 
+#define MaxVertexNum 50
+#define MAX 50
 #define key 26//key为顶点个数 
 typedef struct arcell//边的权值信息
 { 	int adj;//权值  
@@ -28,14 +28,14 @@ mgraph initgraph()
 {	int i=0,j=0;
 	mgraph c;
 	c.vexnum=26;//顶点个数 
-	c.arcnum=20;//边的个数 
+	c.arcnum=47;//边的个数 
 	for(i=1;i<=key;i++)//依次设置顶点编号 
 	  c.vexs[i].position=i;
 	//依次输入顶点信息
 	strcpy(c.vexs[1].name,"工商学院楼");
-	strcpy(c.vexs[1].introduction,"1"); 
+	strcpy(c.vexs[1].introduction,"工商管理学院的学院楼，其基础设施等条件在学校里是名列前茅的"); 
 	strcpy(c.vexs[2].name,"三食堂");
-	strcpy(c.vexs[2].introduction,"2"); 
+	strcpy(c.vexs[2].introduction,"emmm没怎么去过，难以介绍"); 
 	strcpy(c.vexs[3].name,"第三教学楼");
 	strcpy(c.vexs[3].introduction,"3"); 
 	strcpy(c.vexs[4].name,"问鼎广场");
@@ -87,38 +87,53 @@ mgraph initgraph()
 	for(i=1;i<=key;i++)
 	  for(j=1;j<=key;j++)
 	    c.arcs[i][j].adj=Infinity;//先初始化图的邻接矩阵 	
-	c.arcs[1][2].adj=150;
-	c.arcs[1][3].adj=100;
-	c.arcs[2][3].adj=190;
-	c.arcs[3][4].adj=150;
-	c.arcs[3][5].adj=100;
-	c.arcs[4][6].adj=300;
-	c.arcs[4][5].adj=200;
-	c.arcs[5][6].adj=160;
-	c.arcs[6][7].adj=100;
-	c.arcs[6][8].adj=110;
-	c.arcs[6][10].adj=140;
-	c.arcs[7][8].adj=130;
-	c.arcs[7][9].adj=30;
-	c.arcs[8][9].adj=200;
-	c.arcs[8][11].adj=20;
-	c.arcs[9][10].adj=35;
-	c.arcs[9][12].adj=30;
-	c.arcs[10][11].adj=70; 
-	c.arcs[10][12].adj=100;
-	c.arcs[11][13].adj=100;
-	c.arcs[12][13].adj=100;
-	c.arcs[13][14].adj=100;
-	c.arcs[13][15].adj=100;
-	c.arcs[14][15].adj=100;
-	c.arcs[14][16].adj=100;
-	c.arcs[15][16].adj=100;
-	c.arcs[15][17].adj=100;
-	c.arcs[16][17].adj=100;
-	c.arcs[17][18].adj=100;
-	c.arcs[17][19].adj=100;
-	c.arcs[18][19].adj=100;
-	c.arcs[18][20].adj=100;
+	c.arcs[1][2].adj = 30;
+	c.arcs[1][3].adj = 80;
+	c.arcs[2][3].adj = 50;
+	c.arcs[3][4].adj = 20;
+	c.arcs[3][5].adj = 40;
+	c.arcs[4][6].adj = 100;
+	c.arcs[4][5].adj = 50;
+	c.arcs[5][6].adj = 50;
+	c.arcs[6][7].adj = 20;
+	c.arcs[6][8].adj = 40;
+	c.arcs[7][10].adj = 20;
+	c.arcs[7][9].adj = 30;
+	c.arcs[8][10].adj = 30;
+	c.arcs[8][11].adj = 10;
+	c.arcs[9][10].adj = 80;
+	c.arcs[9][12].adj = 20;
+	c.arcs[10][11].adj = 80;
+	c.arcs[10][13].adj = 50;
+	c.arcs[10][14].adj = 50;
+	c.arcs[11][14].adj = 100;
+	c.arcs[11][15].adj = 100;
+	c.arcs[12][13].adj = 100;
+	c.arcs[12][16].adj = 50;
+	c.arcs[13][14].adj = 20;
+	c.arcs[13][16].adj = 60;
+	c.arcs[13][17].adj = 25;
+	c.arcs[14][17].adj = 25;
+	c.arcs[14][21].adj = 120;
+	c.arcs[15][21].adj = 100;
+	c.arcs[16][17].adj = 30;
+	c.arcs[16][18].adj = 20;
+	c.arcs[17][19].adj = 40;
+	c.arcs[17][20].adj = 40;
+	c.arcs[18][19].adj = 30;
+	c.arcs[18][22].adj = 50;
+	c.arcs[19][20].adj = 100;
+	c.arcs[19][23].adj = 40;
+	c.arcs[20][21].adj = 40;
+	c.arcs[20][24].adj = 50;
+	c.arcs[21][25].adj = 30;
+	c.arcs[22][23].adj = 80;
+	c.arcs[22][26].adj = 250;
+	c.arcs[23][24].adj = 70;
+	c.arcs[23][26].adj = 200;
+	c.arcs[24][25].adj = 50;
+	c.arcs[24][26].adj = 200;
+	c.arcs[25][26].adj = 250;
 	for(i=1;i<=key;i++)//邻接矩阵是对称矩阵，对称赋值（无向图需要对称赋值） 
 	  for(j=1;j<=key;j++)
 	    c.arcs[j][i].adj=c.arcs[i][j].adj;
@@ -131,15 +146,15 @@ int locatevex(mgraph c,int v)//locatevex
 	  if(v==c.vexs[i].position)  return i;//找到，返回顶点序号i 
  	return -1;//没有找到这个顶点 
 } 
-//3.查找并输出序号为m,n景点间的长度不超过8个景点的路径 
+//3.查找并输出序号为m,n景点间的长度不超过特定个景点的路径 
 void path(mgraph c,int m,int n,int k)
 {	int s,t=k+1,length=0;//t用于存放路径上下一个顶点对应的d[]数组元素的下标 
-	if(d[k]==n&&k<8)//若d[k]是终点n且景点个数<=8,则输出该路径 
+	if(d[k]==n&&k<26)//若d[k]是终点n且景点个数<=26,则输出该路径 
 	{	for(s=0;s<k;s++)//计算路径长度 
 	    {    	 
 	    	length=length+c.arcs[d[s]][d[s+1]].adj;
 		} 
-		if(length<=100)//打印路径长度小于定长的路径 
+		if(length<=565)//打印路径长度小于定长的路径 
 		{	for(s=0;s<k;s++)//输出该路径。s=0时为起点m
 	        {
 	    	   printf("%d%s--->",d[s],c.vexs[d[s]].name);
@@ -214,21 +229,7 @@ void shortestpath_dij(mgraph c)
 				Patharc[w]=k; //存放前驱结点（像糖葫芦） 
 			}
 		  } 
-     }
-     printf("打印P数组:");
-     for(t=1;t<=c.vexnum;t++)
-     {
-     	printf("%d ",Patharc[t]);
-	 }
-	 printf("\n\n");
-	 //打印s数组
-	 printf("打印S数组:");
-     for(t=1;t<=c.vexnum;t++)
-     {
-     	printf("%d ",ShortPathtable[t]);
-	 }
-	 printf("\n\n");
-	  
+     }  
      //打印最短路径
 	 for(t=1;t<=c.vexnum;t++)
 	 {  p=t;
@@ -265,12 +266,12 @@ void menu()
 	printf(" │  *************************************************** │\n");
 	printf(" └──────────────────────────────────────────────────────┘\n");
 }
-//12.输出图的邻接矩阵的值*** 
+//6.输出图的邻接矩阵的值 
 void printmatrix(mgraph c)
 {	int i,j,k=0;
 	for(i=1;i<=key;i++)
 	{  if(c.vexs[i].position!=-1)
-		  printf("%6d",i);//横着的标号1到11
+		  printf("%6d",i);//横着的标号1到26
 	}
 	printf("\n");
 	for(i=1;i<=c.vexnum;i++)
@@ -285,7 +286,7 @@ void printmatrix(mgraph c)
 	  }		
 } 
 
-//14.查询两景点间的最短路径（floyd算法）
+//7.查询两景点间的最短路径（floyd算法）
 void floyd(mgraph c)//一种暴力破解获取最短路径的算法 
 {	int i,j,k;
 	for(i=1;i<=key;i++)//将图的邻接矩阵赋值给 shortest二维数组，将矩阵pathh全部初始化为-1 
@@ -293,19 +294,6 @@ void floyd(mgraph c)//一种暴力破解获取最短路径的算法
 		{	shortest[i][j]=c.arcs[i][j].adj;
 			pathh[i][j]=j; 
 		}
-	}
-	int i1,j1,k1=0;
-	for(i1=1;i1<=key;i1++)
-		printf("%6d",i1);//横着的标号1到11
-	printf("\n");
-	for(i1=1;i1<=key;i1++)
-	{  printf("%d",i1);//竖着的标号1到11
-	  for(j1=1;j1<=key;j1++)
-	  {	
-	     printf("%6d",pathh[i1][j1]);
-	  	k1++;
-	  	if(k1%key==0) printf("\n");
-	  }		
 	}
 	printf("\n\n\n");
 	
@@ -320,22 +308,6 @@ void floyd(mgraph c)//一种暴力破解获取最短路径的算法
 			 }
 		}
 	}
-}
-//打印出最短路径的邻接矩阵
-void printf_Pshuzu()
-{	int i,j,k=0;
-	for(i=1;i<=key;i++)
-		printf("%6d",i);//横着的标号0到11
-	printf("\n");
-	for(i=1;i<=key;i++)
-	{  printf("%d",i);//竖着的标号0到11
-	  for(j=1;j<=key;j++)
-	  {	printf("%6d",pathh[i][j]);
-	  	k++;
-	  	if(k%key==0) printf("\n");
-	  }		
-	}
-	printf("\n\n\n");
 }
 //打印出最短路径 
 void display(mgraph c,int i,int j)
@@ -353,20 +325,22 @@ void display(mgraph c,int i,int j)
 //任意两点间最短距离（弗洛伊德算法）
 int shortdistance(mgraph c) 
 {	int i,j;
-	printf("请输入要查询的两个景点的数字编号（1->11）中间用空格间隔开。\n"); 
+	printf("请输入要查询的两个景点的数字编号（1->26）中间用空格间隔开。\n"); 
 	scanf("%d %d",&i,&j);
 	if(i>key||i<0||j>key||j<0)
 	{	printf("输入信息错误！\n\n");
-		printf("请输入要查询的两个景点的数字编号（1->11）中间用空格间隔开。\n"); 
+		printf("请输入要查询的两个景点的数字编号（1->26）中间用空格间隔开。\n"); 
 		scanf("%d %d",&i,&j);
 	}
 	else
-	{	floyd(c);printf_Pshuzu();
+	{	
+		floyd(c);
+		// printf_Pshuzu();
 		display(c,i,j);
 	}
 	return 1;
 }
-//15.查询景点的信息
+//8.查询景点的信息
 void seeabout(mgraph c)
 {	int k;
 	printf("\n请输入要查询的景点编号：");
@@ -380,7 +354,7 @@ void seeabout(mgraph c)
 	printf("\n景点名称：%-10s\n",c.vexs[k].name);
 	printf("\n详细介绍：%-80s\n\n",c.vexs[k].introduction);
 }
-//16.显示所有景点信息
+//9.显示所有景点信息
 void browsecompus(mgraph c) 
 {	int i;
 	printf(" \n\n编号        景点名称                   简介\n");
@@ -391,7 +365,7 @@ void browsecompus(mgraph c)
 	}
 	printf("____________________________________________________________________________________________\n");
 }
-//18.主要工作函数。操作区用户界面
+//10.主要工作函数。操作区用户界面
 void mainwork()
 {   menu();
 	int yourchoice;
